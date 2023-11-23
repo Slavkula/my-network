@@ -1,0 +1,23 @@
+---
+- name: Configure loopback
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+    hostname_prefix: "Dev_Ro_Cis_"
+
+  tasks:
+    - name: Define router number
+      set_fact:
+        router_number: "{{ inventory_hostname | regex_replace('^.*\\D', '') }}"
+
+    - name: Creating hostname
+      set_fact:
+        router_hostname: "{{ hostname_prefix }}{{ router_number }}"
+
+    - name: Setting up hostname
+      ios_config:
+        lines:
+          - "hostname {{ router_hostname }}"
