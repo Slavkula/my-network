@@ -1,5 +1,5 @@
 ---
-- name: Configure loopback
+- name: Configure hostname
   hosts: cisco
   gather_facts: no
   vars:
