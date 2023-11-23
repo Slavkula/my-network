@@ -1,4 +1,24 @@
 Самое начало. Здесь будет выложена начальная настройка роутера (ssh, user, domain)
-Будет настроена hostname.
+Общий вид сети: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.24112023.png
+Красным выделено то, что я буду называть "внутренняя сеть". 
+Внешняя будет для различных тестов.
+Файлы переменных в host_vars менять и дополнять придётся часто, поэтому не буду отдельно их выкладывать.
 
-Общий вид сети
+1.Доступ к роутеру:
+host Rotaru
+crypto key generate rsa modulus 2048
+ip domain-name slavik.ru
+ip ssh time-out 60
+ip ssh version 2
+username ansible priv 15 secret ansible
+line vty 0 4
+login local
+
+2.Далее ансибл. Сначала раздам hostname. Использованный плейбук по ссылке:
+https://github.com/Slavkula/my-network/blob/main/playbooks/hostname
+К чему лишние шаги в плейбуке: в нём я просто решил попробовать что-то более сложное, чем подстановка переменных из host_vars.
+
+3.Раздаю адреса на интерфейсы.
+https://github.com/Slavkula/my-network/blob/main/playbooks/interface_address
+На некоторых роутерах не используется интерфейс ethernet0/3 (на шаге настройки внутренней сети), поэтому в плейбуке на нём примечание "when", которое пропускает настройку,
+если переменная не определена.
