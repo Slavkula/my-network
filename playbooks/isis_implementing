@@ -1,0 +1,41 @@
+---
+- name: Configure isis
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Определение номера роутера
+      set_fact:
+        router_number: "{{ inventory_hostname | regex_replace('^.*\\D', '') }}"
+
+    - name: Вычисление идентификатора сети (net)
+      set_fact:
+        net_id: "49.0000.0000.0000.0{{ router_number }}.00" 
+
+    - name: Configure isis
+      ios_config:
+        lines:
+          - router isis 1
+          - net {{ net_id }}
+          - log-adjacency-changes 
+          - is-type level-2-only
+          - bfd all-interfaces
+          - ispf level-2
+        parents: router isis
+
+    - name: Configure interfaces loopback
+      ios_config:
+        lines:
+          - interface loopback 1
+          - ip router isis 1
+
+    - name: Configure interfaces ethernet
+      ios_config:
+        lines:
+          - interface range ethernet 0/1-2
+          - ip router isis 1
+          
