@@ -16,6 +16,7 @@
         lines:
           - "interface ethernet0/1"
           - "ip address {{ eth1 }} 255.255.255.252"
+          - no shut
         parents: interface ethernet0/1
         
     - name: Настройка интерфейса 2
@@ -23,6 +24,7 @@
         lines:
           - "interface ethernet0/2"
           - "ip address {{ eth2 }} 255.255.255.252"
+          - no shut
         parents: interface ethernet0/2
         
     - name: Настройка интерфейса 3
@@ -30,6 +32,7 @@
         lines:
           - "interface ethernet0/3"
           - "ip address {{ eth3 }} 255.255.255.252"
+          - no shut
         parents: interface ethernet0/3
       when: eth3 is defined
         
