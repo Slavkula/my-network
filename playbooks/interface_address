@@ -1,0 +1,43 @@
+---
+- name: Configure interfaces
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Файлы переменных
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+
+    - name: Настройка интерфейса 1
+      ios_config:
+        lines:
+          - "interface ethernet0/1"
+          - "ip address {{ eth1 }} 255.255.255.252"
+        parents: interface ethernet0/1
+        
+    - name: Настройка интерфейса 2
+      ios_config:
+        lines:
+          - "interface ethernet0/2"
+          - "ip address {{ eth2 }} 255.255.255.252"
+        parents: interface ethernet0/2
+        
+    - name: Настройка интерфейса 3
+      ios_config:
+        lines:
+          - "interface ethernet0/3"
+          - "ip address {{ eth3 }} 255.255.255.252"
+        parents: interface ethernet0/3
+      when: eth3 is defined
+        
+    - name: Настройка интерфейса Loopback1
+      ios_config:
+        lines:
+          - "interface loopback1"
+          - "ip address {{ loopback1 }} 255.255.255.255"
+        parents: interface loopback 1
+        
+        
