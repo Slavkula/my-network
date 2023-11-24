@@ -7,3 +7,7 @@ https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.24112023.1.png
 2. Настраиваю RR: https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_RR
 В плейбук в скобках указаны оба адреса рефлекторов, лишний в каждом случае я убираю.
 
+3. Теперь надо снизить нагрузку на рефлекторы, чтобы основной трафик шёл в обход. Для этого изменяю метрику в igp.
+Метрику меняю на самом RR (последнее задание в плейбуке):
+https://github.com/Slavkula/my-network/blob/main/playbooks/isis_implementing
+
