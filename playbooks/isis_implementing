@@ -38,4 +38,11 @@
         lines:
           - interface range ethernet 0/1-2
           - ip router isis 1
+
+    - name: Configure isis
+      ios_config:
+        lines:
+          - router isis 1
+          - metric 63 level-2
+          - do wr
           
