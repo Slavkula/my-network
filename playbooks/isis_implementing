@@ -39,7 +39,7 @@
           - interface range ethernet 0/1-2
           - ip router isis 1
 
-    - name: Configure isis
+    - name: Configure isis metric
       ios_config:
         lines:
           - router isis 1
