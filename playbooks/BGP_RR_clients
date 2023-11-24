@@ -1,0 +1,26 @@
+---
+- name: Configuring iBGP
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Файлы переменных
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+      
+    - name: iBGP
+      ios_config:
+        lines:
+          - router bgp 65000
+          - "bgp router-id {{ loopback1 }}"
+          - "neighbor 172.16.255.208 remote-as 65000"
+          - "neighbor 172.16.255.208 update-source Loopback 1"
+          - "neighbor 172.16.255.105 remote-as 65000"
+          - "neighbor 172.16.255.105 update-source Loopback 1"
+          - "address-family ipv4"
+          - "neighbor 172.16.255.208 next-hop-self"
+          - "neighbor 172.16.255.105 next-hop-self"
+        parents: router bgp 65000
