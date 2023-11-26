@@ -91,4 +91,33 @@
           - network 10.15.4.1 mask 255.255.255.252
         parents: router bgp 65000
 
+---
+- name: Configuring eBGP
+  hosts: 192.168.1.106
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
 
+  tasks:
+    - name: Переменные
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+      
+    - name: Настройка интерфейса 3
+      ios_config:
+        lines:
+          - "interface ethernet0/3"
+          - "ip address {{ eth3 }} 255.255.255.252"
+          - no shut
+        parents: interface ethernet0/3
+        
+    - name: Настройка eBGP
+      ios_config:
+        lines: 
+          - router bgp 65000
+          - neighbor 10.10.6.1 remote-as 65010
+          - address-family ipv4
+          - neighbor 10.10.6.1 activate
+          - network 10.10.6.1 mask 255.255.255.252
+        parents: router bgp 65000
