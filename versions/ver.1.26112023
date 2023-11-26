@@ -8,3 +8,8 @@ https://github.com/Slavkula/my-network/blob/main/playbooks/ntp_syslog
 3. Не знаю как реализуется бэкап в сетях с большим количеством роутеров, нашёл и линукс скрипты, и ансибл плейбуки, было упоминание, что даже вручную (надеюсь шутка). В моей я использую Cisco EEM. 
 Давно хотел найти ему какое-нибудь применение, вот и подвернулся случай. Не претендую на то, что выдумал лучший вариант.
 https://github.com/Slavkula/my-network/blob/main/playbooks/EEM_backup
+
+4. Не подумал сразу, что нужно больше "клиентских" роутеров добавить для теста разных функций, поэтому добавляю сейчас. Итоговый вид и настройки тут:
+https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.26112023.png
+И поднимаю с ними же связность по BGP с помощью плейбуков похожих на эти:
+https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer
