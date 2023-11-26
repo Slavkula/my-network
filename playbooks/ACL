@@ -1,0 +1,25 @@
+---
+- name: Config ACL
+  hosts: 192.168.1.207, 192.168.1.209
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Config ACL
+      ios_config:
+        lines:
+          - "ip access-list extended ToInsideNetwork"
+          - deny ip any 172.16.0.0 0.0.255.255 
+          - deny ip any 192.168.1.0 0.0.0.255
+          - permit ip any any
+        parents: ip access-list extended ToInsideNetwork
+        
+    - name: Attaching ACL to interface
+      ios_config:
+        lines:
+          - interface ethernet 0/3
+          - "ip access-group ToInsideNetwork in"
+        parents: interface ethernet 0/3
