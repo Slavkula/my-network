@@ -4,5 +4,7 @@ https://github.com/Slavkula/my-network/blob/main/playbooks/ACL
 
 2. NTP & Syslog.
 https://github.com/Slavkula/my-network/blob/main/playbooks/ntp_syslog
-Комментарии излишни.
 
+3. Не знаю как реализуется бэкап в сетях с большим количеством роутеров, нашёл и линукс скрипты, и ансибл плейбуки, было упоминание, что даже вручную (надеюсь шутка). В моей я использую Cisco EEM. 
+Давно хотел найти ему какое-нибудь применение, вот и подвернулся случай. Не претендую на то, что выдумал лучший вариант.
+https://github.com/Slavkula/my-network/blob/main/playbooks/EEM_backup
