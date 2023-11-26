@@ -1,0 +1,18 @@
+---
+- name: EEM backup
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+
+  tasks:
+    - name: Настройка EEM скрипта
+      ios_config:
+        lines:
+          - event manager applet daily_backup
+          - event timer cron cron-entry "30 23 * * *"
+          - action 1.0 cli command "enable"
+          - action 2.0 cli command "copy running-config tftp://192.168.1.254/Cis_Ro_Back_$(show clock | i ^[0-9])"
