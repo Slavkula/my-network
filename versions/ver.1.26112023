@@ -2,3 +2,7 @@
 https://github.com/Slavkula/my-network/blob/main/playbooks/ACL
 После исполнения получаем unreachable от пингов указанных сетей, а все остальные разрешённые успешно пингуются.
 
+2. NTP & Syslog.
+https://github.com/Slavkula/my-network/blob/main/playbooks/ntp_syslog
+Комментарии излишни.
+
