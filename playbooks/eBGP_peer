@@ -88,7 +88,7 @@
           - neighbor 10.15.4.1 remote-as 65015
           - address-family ipv4
           - neighbor 10.15.4.1 activate
-          - network 10.15.4.1 mask 255.255.255.252
+          - network 10.15.4.0 mask 255.255.255.252
         parents: router bgp 65000
 
 ---
@@ -119,5 +119,5 @@
           - neighbor 10.10.6.1 remote-as 65010
           - address-family ipv4
           - neighbor 10.10.6.1 activate
-          - network 10.10.6.1 mask 255.255.255.252
+          - network 10.10.6.0 mask 255.255.255.252
         parents: router bgp 65000
