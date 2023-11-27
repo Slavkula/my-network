@@ -2,4 +2,8 @@
 Вид: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.27112023.png
 
 1. Раздаём дополнительные loopack2,3,4 адреса. Плейбуки не буду множить, в одном из прошлых интерфейсы уже настраивал.
-2.
+
+2. Создаю DMVPN hub, им будет роутер R13: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_hub
+
+3. 
+
