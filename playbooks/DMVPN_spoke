@@ -1,0 +1,25 @@
+---
+- name: Configuring DMVPN hub
+  hosts: 192.168.1.110, 192.168.1.112, 192.168.1.115
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Переменные
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+      
+    - name: Configure tunnel
+      ios_config:
+        lines:
+          - interface tunnel 1
+          - tunnel source ethernet 0/0 
+          - tunnel mode gre multipoint
+          - ip address {{ tun1 }} 255.255.255.0
+          - ip nhrp network-id 777
+          - ip nhrp shortcut
+          - ip nhrp nhs 172.16.100.1 nbma 13.13.13.13 multicast
+          - ip mtu 1400
+          - ip tcp adjust-mss 1360 
