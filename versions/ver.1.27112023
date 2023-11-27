@@ -5,5 +5,5 @@
 
 2. Создаю DMVPN hub, им будет роутер R13: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_hub
 
-3. 
+3. DMVPN spoke: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_spoke
 
