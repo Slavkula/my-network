@@ -22,7 +22,7 @@
           - interface tunnel 1
           - ip ospf network broadcast
           - ip ospf hello-interval 30
-          - ip ospf priority 0
+          - ip ospf priority 0 !!!
         parents: interface tunnel 1
 
 ---
