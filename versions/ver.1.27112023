@@ -7,3 +7,8 @@
 
 3. DMVPN spoke: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_spoke
 
+4. Для проверки работоспособности поставлю ospf и раздам все маршруты, не буду усложнять, мне нужно просто узнать работают туннель или нет.
+https://github.com/Slavkula/my-network/blob/main/playbooks/ospf_for_tunnels
+В плейбуке добавлены настройки для туннельных интерфейсов: изменение типа сети, hello таймер, ospf приоритет. Опять же с приоритетом сильно не мудрил, всем поставил 0, кроме одного роутера, который будет DR.
+Результат здесь: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.27112023.2.PNG
+Проверка соседства ospf, маршрутов, пинга.
