@@ -14,12 +14,14 @@
     - name: Configure tunnel
       ios_config:
         lines:
-          - interface tunnel 1
-          - tunnel source ethernet 0/0 
-          - tunnel mode gre multipoint
+          - interface tunnel 100
           - ip address {{ tun1 }} 255.255.255.0
-          - ip nhrp network-id 777
-          - ip nhrp shortcut
-          - ip nhrp nhs 172.16.100.1 nbma 13.13.13.13 multicast
           - ip mtu 1400
-          - ip tcp adjust-mss 1360 
+          - ip nhrp net 100
+          - ip nhrp nhs 172.16.200.1 nbma 10.13.9.1 multic
+          - ip nhrp shortcut
+          - ip tcp adju 1360
+          - tun source ethernet 0/0
+          - tunnel mode gre multip
+          - tunnel key 100
+
