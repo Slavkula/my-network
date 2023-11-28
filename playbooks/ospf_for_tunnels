@@ -1,0 +1,26 @@
+---
+- name: Configuring ospf for tunnels
+  hosts: clients
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Config ospf
+      ios_config:
+        lines:
+          - router ospf 1
+          - router-id {{ loopback1 }}
+          - net 172.16.100.0 0.0.0.255 area 0
+        parents: router ospf 1
+        
+    - name: Config interfaces
+      ios_config:
+        lines:
+          - interface tunnel 1
+          - ip ospf network broadcast
+          - ip ospf hello-interval 30
+          - ip ospf priority 0
+        parents: interface tunnel 1
