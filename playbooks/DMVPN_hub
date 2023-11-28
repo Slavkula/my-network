@@ -11,11 +11,12 @@
     - name: Config
       ios_config:
         lines:
-          - interface tunnel 1
-          - tunnel source Ethernet0/0 
-          - tunnel mode gre multipoint
-          - ip address 172.16.100.1 255.255.255.0
-          - ip nhrp network-id 777
-          - ip nhrp redirect
+          - interface tunnel 100
+          - ip address 172.16.200.1 255.255.255.0
           - ip mtu 1400
-          - ip tcp adjust-mss 1360 
+          - ip nhrp map multicast dynamic
+          - ip nhrp network-id 100
+          - ip tcp adjus 1360
+          - tun source ethernet 0/0
+          - tunnel mode gre multipoint
+          - tunnel key 100
