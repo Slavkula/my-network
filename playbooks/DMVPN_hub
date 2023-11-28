@@ -11,7 +11,7 @@
     - name: Config
       ios_config:
         lines:
-          - interface tunnel 2
+          - interface tunnel 1
           - tunnel source Ethernet0/0 
           - tunnel mode gre multipoint
           - ip address 172.16.100.1 255.255.255.0
