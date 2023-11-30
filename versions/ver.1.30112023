@@ -5,3 +5,4 @@
 https://github.com/Slavkula/my-network/blob/main/playbooks/Securing_DMVPN_tunnels
 
 2. Сокращаю таблицу маршрутизации и отправляю внешним роутерам только маршруты по умолчанию:
+https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_default_route
