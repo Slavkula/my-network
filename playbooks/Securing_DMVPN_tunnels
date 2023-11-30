@@ -1,0 +1,43 @@
+---
+- name: Securing DMVPN tunnels
+  hosts: clients
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Создание ISAKMP policy
+      ios_config:
+        lines:
+          - crypto isakmp policy 1
+          - encr 3des
+          - authentication pre-share
+          - group 24
+          - hash md5
+        parents: crypto isakmp policy 1
+
+
+    - name: Настройка ISAKMP key
+      ios_config:
+        lines:   
+          - crypto isakmp key slavkula address 0.0.0.0
+          
+    - name: Создание transform-set
+      ios_config:
+        lines:
+          - crypto ipsec transform-set TS1 esp-3des 
+          - mode transport
+
+    - name: Создание IPsec profile
+      ios_config:
+        lines:  
+          - crypto ipsec profile Profile1
+          - set transform-set TS1
+
+    - name: Configure tunnel
+      ios_config:
+        lines:
+          - interface tunnel 100
+          - tunnel protection ipsec profile Profile1
