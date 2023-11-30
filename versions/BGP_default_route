@@ -1,0 +1,23 @@
+---
+- name: Default route
+  hosts: 192.168.1.106
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Prefix-list
+      ios_config:
+        lines:
+          - ip prefix-list DefaultRoute permit 0.0.0.0/0
+          
+    - name: Раздача маршрута
+      ios_config:
+        lines:
+          - router bgp 65000
+          - address-family ipv4
+          - neighbor 10.10.6.1 default-originate
+          - neighbor 10.10.6.1 prefix-list DefaultRoute out
+        parents: router bgp 65000
