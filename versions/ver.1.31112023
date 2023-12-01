@@ -6,4 +6,5 @@ https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer
 2. Включаю MPLS и LDP: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
 
 3. Возникла проблема: ансибл не умеет работать глубоко в под меню, придётся использовать модули, чтобы добавить настройки vrf в bgp процесс.
+https://github.com/Slavkula/my-network/blob/main/playbooks/MPLS_L3VPN
 
