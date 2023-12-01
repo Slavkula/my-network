@@ -1,5 +1,5 @@
 ---
-- name: MPLS
+- name: Conf mpls
   hosts: cisco
   gather_facts: no
   vars:
@@ -8,10 +8,12 @@
     ansible_become_method: enable
 
   tasks:
-    - name: Config MPLS
+      
+    - name: Configure MPLS
       ios_config:
         lines:
           - mpls ip
           - mpls ldp router-id loopback1 force
           - interface range ethernet 0/1-3
           - mpls ip
+        parents: interface range ethernet 0/1-3
