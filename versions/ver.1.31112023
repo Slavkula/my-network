@@ -1,0 +1,5 @@
+Добавляю MPLS L3VPN.
+
+1. Включаю MPLS и LDP: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
+
+2. 
