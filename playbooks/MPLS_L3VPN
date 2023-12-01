@@ -1,0 +1,37 @@
+- name: Настройка BGP и VRF на маршрутизаторе
+  hosts: 192.168.1.201
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become: yes
+    
+  tasks:
+    - name: Configure VRF
+      ios_config:
+        lines:
+          - ip vrf client1
+          - rd 65016:65000
+          - route-target both 65016:65000
+
+    - name: Attaching VRF
+      ios_config:
+        lines:
+          - interface ethernet 1/0
+          - ip vrf forwarding client1
+          - ip address 10.16.1.2 255.255.255.252
+ 
+    - name: bgp peering
+      cisco.ios.ios_bgp_address_family:
+        config:
+          as_number: 65000
+          address_family:
+            - afi: ipv4
+              vrf: client1
+              neighbor:
+                - address: 10.16.1.1
+                  remote_as: 65016
+              network:
+                - address: 10.16.1.0
+                  mask: 255.255.255.252
+        state: merged
