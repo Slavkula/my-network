@@ -1,5 +1,9 @@
-Добавляю MPLS L3VPN.
+Добавляю MPLS L3VPN  для клиентов. Топология: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.31112023.PNG
 
-1. Включаю MPLS и LDP: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
+1. BGP соседство с новыми роутерами. Не раз настраивалось, плейбук использую старый, меняю только адреса и интерфейсы:
+https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer
 
-2. 
+2. Включаю MPLS и LDP: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
+
+
+
