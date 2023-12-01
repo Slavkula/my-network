@@ -1,0 +1,17 @@
+---
+- name: MPLS
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become_method: enable
+
+  tasks:
+    - name: Config MPLS
+      ios_config:
+        lines:
+          - mpls ip
+          - mpls ldp router-id loopback1 force
+          - interface range ethernet 0/1-3
+          - mpls ip
