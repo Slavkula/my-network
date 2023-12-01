@@ -5,3 +5,4 @@
 2. Настраиваю vrf, назначаю на интерфейсы, в них же поднимаю BGP процесс:
 https://github.com/Slavkula/my-network/blob/main/playbooks/MPLS_L3VPN
 
+3. 
