@@ -11,8 +11,8 @@
       ios_config:
         lines:
           - ip vrf client1
-          - rd 65016:65000
-          - route-target both 65016:65000
+          - rd 65016:65025
+          - route-target both 65016:65025
 
     - name: Attaching VRF
       ios_config:
