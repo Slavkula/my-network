@@ -5,4 +5,20 @@
 2. Настраиваю vrf, назначаю на интерфейсы, в них же поднимаю BGP процесс:
 https://github.com/Slavkula/my-network/blob/main/playbooks/MPLS_L3VPN
 
-3. 
+3. Не нашёл модуль настройки в address-family vpnv4, пришлось настраивать руками. В конфиг добавил:
+а) iBGP соседство между своими PE-роутерами:
+router bgp 65000
+ neighbor 172.16.255.203 remote-as 65000
+ neighbor 172.16.255.203 update-source Loopback1
+
+б) Адресное семейство vpnv4:
+ address-family vpnv4
+  neighbor 172.16.255.203 activate
+  neighbor 172.16.255.203 send-community both
+
+в) Для vrf:
+ address-family ipv4 vrf client1
+  network 10.16.1.0 mask 255.255.255.252
+  neighbor 10.16.1.1 remote-as 65016
+  neighbor 10.16.1.1 activate
+
