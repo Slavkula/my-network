@@ -1,4 +1,4 @@
-Добавляю MPLS L3VPN  для клиентов. Топология: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.31112023.PNG
+Добавляю MPLS L3VPN  для клиентов R16 - R25. Топология: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.31112023.PNG
 
 1. Включаю MPLS и LDP на всей внутренней сети: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
 
