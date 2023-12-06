@@ -1,0 +1,62 @@
+hostname Dev_Ro_Cis_202
+!
+ip domain name slavik.ru
+ip cef
+!
+username ansible privilege 15 secret 5 $1$awMg$vmdppuJxmzU5iNxquaJLu0
+!
+ip ssh version 2
+!
+interface Loopback1
+ ip address 172.16.255.202 255.255.255.255
+ ip router isis 1
+!
+interface Ethernet0/0
+ ip address 192.168.1.202 255.255.255.0
+!
+interface Ethernet0/1
+ ip address 172.16.1.34 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/2
+ ip address 172.16.1.37 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/3
+ ip address 10.10.0.14 255.255.255.252
+ mpls ip
+!
+router isis 1
+ net 49.0000.0000.0000.0202.00
+ is-type level-2-only
+ ispf level-2
+ log-adjacency-changes
+ bfd all-interfaces
+!
+router bgp 65000
+ bgp router-id 172.16.255.202
+ bgp log-neighbor-changes
+ neighbor 172.16.255.105 remote-as 65000
+ neighbor 172.16.255.105 update-source Loopback1
+ neighbor 172.16.255.208 remote-as 65000
+ neighbor 172.16.255.208 update-source Loopback1
+ !
+ address-family ipv4
+  neighbor 172.16.255.105 activate
+  neighbor 172.16.255.105 next-hop-self
+  neighbor 172.16.255.208 activate
+  neighbor 172.16.255.208 next-hop-self
+ exit-address-family
+!
+logging trap notifications
+logging source-interface Ethernet0/0
+logging host 192.168.1.89
+!
+mpls ldp router-id Loopback1 force
+!
+ntp server 192.168.1.89
+event manager applet daily_backup
+ action 1.0 cli command "enable"
+ action 2.0 cli command "copy running-config tftp://192.168.1.254/Cis_Ro_Back_$(show clock | i ^[0-9])"
