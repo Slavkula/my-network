@@ -1,0 +1,63 @@
+hostname R13
+!
+ip domain name slavik.ru
+ip cef
+!
+username ansible privilege 15 secret 5 $1$w8AG$VUFUDbOVIfWHJL946uTrr/
+!
+ip ssh version 2
+!
+crypto isakmp policy 1
+ encr 3des
+ hash md5
+ authentication pre-share
+ group 24
+crypto isakmp key slavkula address 0.0.0.0
+!
+crypto ipsec transform-set TS1 esp-3des
+ mode transport
+!
+crypto ipsec profile Profile1
+ set transform-set TS1
+!
+interface Loopback1
+ ip address 13.13.13.13 255.255.255.255
+!
+interface Loopback2
+ ip address 172.16.13.1 255.255.255.255
+!
+interface Loopback3
+ ip address 172.16.13.2 255.255.255.255
+!
+interface Loopback4
+ ip address 172.16.13.3 255.255.255.255
+!
+interface Tunnel100
+ ip address 172.16.200.1 255.255.255.0
+ no ip redirects
+ ip mtu 1400
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 100
+ ip nhrp redirect
+ ip tcp adjust-mss 1360
+ ip ospf network broadcast
+ tunnel source Ethernet0/0
+ tunnel mode gre multipoint
+ tunnel key 100
+ tunnel protection ipsec profile Profile1
+!
+interface Ethernet0/0
+ ip address 10.13.9.1 255.255.255.252
+!
+interface Ethernet0/1
+ ip address 192.168.1.113 255.255.255.0
+!
+router ospf 1
+ network 172.16.13.0 0.0.0.255 area 13
+ network 172.16.200.0 0.0.0.255 area 0
+!
+router bgp 65013
+ bgp router-id 13.13.13.13
+ bgp log-neighbor-changes
+ network 13.13.13.13 mask 255.255.255.255
+ neighbor 10.13.9.2 remote-as 65000
