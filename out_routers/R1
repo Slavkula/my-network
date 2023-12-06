@@ -1,0 +1,86 @@
+hostname Dev_Ro_Cis_201
+!
+ip vrf client1
+ rd 65016:65025
+ route-target export 65016:65025
+ route-target import 65016:65025
+!
+ip domain name slavik.ru
+ip cef
+!
+username ansible privilege 15 secret 5 $1$uK5N$133wtUjrXy8qjomqHiLF70
+!
+ip ssh version 2
+!
+interface Loopback1
+ ip address 172.16.255.201 255.255.255.255
+ ip router isis 1
+!
+interface Ethernet0/0
+ ip address 192.168.1.201 255.255.255.0
+!
+interface Ethernet0/1
+ ip address 172.16.1.2 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/2
+ ip address 172.16.1.33 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/3
+ ip address 172.16.1.30 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet1/0
+ ip vrf forwarding client1
+ ip address 10.16.1.2 255.255.255.252
+!
+router isis 1
+ net 49.0000.0000.0000.0201.00
+ is-type level-2-only
+ ispf level-2
+ log-adjacency-changes
+ bfd all-interfaces
+!
+router bgp 65000
+ bgp router-id 172.16.255.201
+ bgp log-neighbor-changes
+ neighbor 172.16.255.105 remote-as 65000
+ neighbor 172.16.255.105 update-source Loopback1
+ neighbor 172.16.255.203 remote-as 65000
+ neighbor 172.16.255.203 update-source Loopback1
+ neighbor 172.16.255.208 remote-as 65000
+ neighbor 172.16.255.208 update-source Loopback1
+ !
+ address-family ipv4
+  neighbor 172.16.255.105 activate
+  neighbor 172.16.255.105 next-hop-self
+  neighbor 172.16.255.203 activate
+  neighbor 172.16.255.208 activate
+  neighbor 172.16.255.208 next-hop-self
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor 172.16.255.203 activate
+  neighbor 172.16.255.203 send-community both
+ exit-address-family
+ !
+ address-family ipv4 vrf client1
+  network 10.16.1.0 mask 255.255.255.252
+  neighbor 10.16.1.1 remote-as 65016
+  neighbor 10.16.1.1 activate
+ exit-address-family
+!
+logging trap notifications
+logging source-interface Ethernet0/0
+logging host 192.168.1.89
+!
+mpls ldp router-id Loopback1 force
+!
+ntp server 192.168.1.89
+event manager applet daily_backup
+ action 1.0 cli command "enable"
+ action 2.0 cli command "copy running-config tftp://192.168.1.254/Cis_Ro_Back_$(show clock | i ^[0-9])"
