@@ -20,7 +20,6 @@ interface Ethernet0/1
  mpls ip
 !
 interface Ethernet0/2
- bandwidth 10000
  ip address 172.16.1.26 255.255.255.252
  ip router isis 1
  mpls ip
