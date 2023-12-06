@@ -1,0 +1,79 @@
+hostname Dev_Ro_Cis_208
+!
+ip domain name slavik.ru
+ip cef
+!
+username ansible privilege 15 secret 5 $1$c/KD$FpoH7kYsWPG0IRA2dg24E.
+!
+ip ssh version 2
+!
+interface Loopback1
+ ip address 172.16.255.208 255.255.255.255
+ ip router isis 1
+!
+interface Ethernet0/0
+ ip address 192.168.1.208 255.255.255.0
+!
+interface Ethernet0/1
+ ip address 172.16.1.25 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/2
+ ip address 172.16.1.22 255.255.255.252
+ ip router isis 1
+ mpls ip
+!
+interface Ethernet0/3
+ ip address 10.10.0.14 255.255.255.252
+ mpls ip
+!
+router isis 1
+ net 49.0000.0000.0000.0208.00
+ is-type level-2-only
+ ispf level-2
+ log-adjacency-changes
+ metric 63 level-2
+ bfd all-interfaces
+!
+router bgp 65000
+ bgp router-id 172.16.255.208
+ bgp log-neighbor-changes
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 65000
+ neighbor iBGP update-source Loopback1
+ neighbor iBGP fall-over bfd
+ neighbor 172.16.255.104 peer-group iBGP
+ neighbor 172.16.255.105 peer-group iBGP
+ neighbor 172.16.255.106 peer-group iBGP
+ neighbor 172.16.255.201 peer-group iBGP
+ neighbor 172.16.255.202 peer-group iBGP
+ neighbor 172.16.255.203 peer-group iBGP
+ neighbor 172.16.255.207 peer-group iBGP
+ neighbor 172.16.255.209 peer-group iBGP
+ !
+ address-family ipv4
+  neighbor iBGP route-reflector-client
+  neighbor iBGP next-hop-self
+  neighbor 172.16.255.104 activate
+  neighbor 172.16.255.105 activate
+  neighbor 172.16.255.106 activate
+  neighbor 172.16.255.201 activate
+  neighbor 172.16.255.202 activate
+  neighbor 172.16.255.203 activate
+  neighbor 172.16.255.207 activate
+  neighbor 172.16.255.209 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+logging trap notifications
+logging source-interface Ethernet0/0
+logging host 192.168.1.89
+!
+mpls ldp router-id Loopback1 force
+!
+ntp server 192.168.1.89
+event manager applet daily_backup
+ action 1.0 cli command "enable"
+ action 2.0 cli command "copy running-config tftp://192.168.1.254/Cis_Ro_Back_$(show clock | i ^[0-9])"
