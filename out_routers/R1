@@ -4,12 +4,15 @@ ip vrf client1
  rd 65016:65025
  route-target export 65016:65025
  route-target import 65016:65025
+ route-target import 65000:1216
 !
 ip domain name slavik.ru
 ip cef
+no ipv6 cef
 !
 username ansible privilege 15 secret 5 $1$uK5N$133wtUjrXy8qjomqHiLF70
 !
+ip ssh time-out 60
 ip ssh version 2
 !
 interface Loopback1
@@ -52,6 +55,8 @@ router bgp 65000
  neighbor 172.16.255.105 update-source Loopback1
  neighbor 172.16.255.203 remote-as 65000
  neighbor 172.16.255.203 update-source Loopback1
+ neighbor 172.16.255.207 remote-as 65000
+ neighbor 172.16.255.207 update-source Loopback1
  neighbor 172.16.255.208 remote-as 65000
  neighbor 172.16.255.208 update-source Loopback1
  !
@@ -59,6 +64,7 @@ router bgp 65000
   neighbor 172.16.255.105 activate
   neighbor 172.16.255.105 next-hop-self
   neighbor 172.16.255.203 activate
+  neighbor 172.16.255.207 activate
   neighbor 172.16.255.208 activate
   neighbor 172.16.255.208 next-hop-self
  exit-address-family
@@ -66,6 +72,8 @@ router bgp 65000
  address-family vpnv4
   neighbor 172.16.255.203 activate
   neighbor 172.16.255.203 send-community both
+  neighbor 172.16.255.207 activate
+  neighbor 172.16.255.207 send-community both
  exit-address-family
  !
  address-family ipv4 vrf client1
@@ -79,6 +87,13 @@ logging source-interface Ethernet0/0
 logging host 192.168.1.89
 !
 mpls ldp router-id Loopback1 force
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input all
 !
 ntp server 192.168.1.89
 event manager applet daily_backup
