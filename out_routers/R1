@@ -1,5 +1,14 @@
 hostname Dev_Ro_Cis_201
 !
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
 ip vrf client1
  rd 65016:65025
  route-target export 65016:65025
@@ -10,7 +19,11 @@ ip domain name slavik.ru
 ip cef
 no ipv6 cef
 !
+multilink bundle-name authenticated
+!
 username ansible privilege 15 secret 5 $1$uK5N$133wtUjrXy8qjomqHiLF70
+!
+redundancy
 !
 ip ssh time-out 60
 ip ssh version 2
@@ -41,12 +54,26 @@ interface Ethernet1/0
  ip vrf forwarding client1
  ip address 10.16.1.2 255.255.255.252
 !
+interface Ethernet1/1
+ no ip address
+ shutdown
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+!
 router isis 1
  net 49.0000.0000.0000.0201.00
  is-type level-2-only
  ispf level-2
  log-adjacency-changes
  bfd all-interfaces
+!
+router isis
 !
 router bgp 65000
  bgp router-id 172.16.255.201
@@ -82,11 +109,18 @@ router bgp 65000
   neighbor 10.16.1.1 activate
  exit-address-family
 !
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
 logging trap notifications
 logging source-interface Ethernet0/0
 logging host 192.168.1.89
 !
 mpls ldp router-id Loopback1 force
+!
+control-plane
 !
 line con 0
  logging synchronous
