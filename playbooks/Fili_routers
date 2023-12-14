@@ -1,0 +1,17 @@
+- name: Настройка роутеров.
+  hosts: fili
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become: yes
+    
+  tasks:
+    - name: Переменные
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+      
+    - name: Apply the provided configuration
+      cisco.ios.ios_hostname:
+        config:
+          hostname: "{{ name1 }}"
+        state: merged
