@@ -10,13 +10,13 @@
     - name: Переменные
       include_vars: "host_vars/{{ inventory_hostname }}.yml"
       
-    - name: Apply the provided configuration
+    - name: hostname
       cisco.ios.ios_hostname:
         config:
           hostname: "{{ name1 }}"
         state: merged
 
-    - name: Merge provided configuration with device configuration
+    - name: Адресация
       cisco.ios.ios_l3_interfaces:
         config:
           - name: Ethernet0/0
