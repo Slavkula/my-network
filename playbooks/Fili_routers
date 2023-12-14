@@ -25,4 +25,7 @@
           - name: Ethernet0/2
             ipv4:
               - address: "{{ ethins2 }}/30"
+          - name: Ethernet0/3
+            ipv4:
+              - address: "{{ ethins3 }}/24"
         state: merged
