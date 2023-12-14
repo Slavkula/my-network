@@ -47,3 +47,22 @@
           - "interface loopback1"
           - "ip address {{ loopback1 }} 255.255.255.255"
         parents: interface loopback 1
+
+    - name: NAT-acl
+      ios_config:
+        lines:
+          - access-list 100 permit ip 172.0.0.0 0.255.255.255 any
+          - "access-list 100 permit ip {{ loopback1 }} 0.0.0.0 any"
+          - "ip nat inside source list 100 interface Ethernet0/0 overload"
+                  
+    - name: NAT-интерфейс out
+      ios_config:
+        lines:
+          - "interface ethernet0/0"
+          - ip nat outside
+          
+    - name: NAT-интерфейсы in
+      ios_config:
+        lines:
+          - "interface range ethernet0/2-3"
+          - ip nat inside
