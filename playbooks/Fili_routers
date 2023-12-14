@@ -66,3 +66,19 @@
         lines:
           - "interface range ethernet0/2-3"
           - ip nat inside
+
+    - name: IP SLA for R17
+      ios_config:
+        lines:
+          - ip sla 1
+          - icmp-echo 10.17.6.2
+          - frequency 5
+        parents: ip sla 1
+          
+    - name: default routes & sla for R17
+      ios_config:
+        lines:
+          - ip route 0.0.0.0 0.0.0.0 10.17.6.2 track 1
+          - ip route 0.0.0.0 0.0.0.0 172.17.18.2 150
+          - ip sla schedule 1 life forever start-time now
+          - track 1 ip sla 1 reachability
