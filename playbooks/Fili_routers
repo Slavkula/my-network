@@ -40,3 +40,10 @@
           - standby 172 preempt delay minimum 5
           - "standby 172 ip {{ hsrp172 }}"
         parents: interface ethernet 0/3
+
+    - name: Настройка интерфейса Loopback1
+      ios_config:
+        lines:
+          - "interface loopback1"
+          - "ip address {{ loopback1 }} 255.255.255.255"
+        parents: interface loopback 1
