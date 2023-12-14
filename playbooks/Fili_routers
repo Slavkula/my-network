@@ -29,3 +29,14 @@
             ipv4:
               - address: "{{ ethins3 }}/24"
         state: merged
+
+    - name: HSRP
+      ios_config:
+        lines:
+          - interface ethernet0/3
+          - standby 172 name fili
+          - standby version 2
+          - "standby 172 priority {{ hsrpprio }}"
+          - standby 172 preempt delay minimum 5
+          - "standby 172 ip {{ hsrp172 }}"
+        parents: interface ethernet 0/3
