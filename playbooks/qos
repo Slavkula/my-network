@@ -1,0 +1,29 @@
+- name: QoS маркировка
+  hosts: 192.168.1.106
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_become: yes
+    
+  tasks:
+    - name: ACL ssh
+      ios_config:
+        lines:
+          - ip access-list extended SSH
+          - permit tcp any any eq 22
+        parents: ip access-list extended SSH
+        
+    - name: ACL telnet
+      ios_config:
+        lines:
+          - ip access-list extended TELNET
+          - permit tcp any any eq 23
+        parents: ip access-list extended TELNET
+          
+    - name: ACL ICMP
+      ios_config:
+        lines:
+          - ip access-list extended ICMP
+          - permit icmp any any
+        parents: ip access-list extended icmp
