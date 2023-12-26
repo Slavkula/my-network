@@ -27,3 +27,24 @@
           - ip access-list extended ICMP
           - permit icmp any any
         parents: ip access-list extended icmp
+
+    - name: class-map ssh
+      ios_config:
+        lines:
+          - class-map match-all MAP_for_SSH
+          - match access-group name SSH
+        parents: class-map match-all MAP_for_SSH
+        
+    - name: class-map telnet
+      ios_config:
+        lines:
+          - class-map match-all MAP_for_TELNET
+          - match access-group name TELNET
+        parents: class-map match-all MAP_for_TELNET
+          
+    - name: class-map ICMP
+      ios_config:
+        lines:
+          - class-map match-all MAP_for_ICMP
+          - match access-group name ICMP
+        parents: class-map match-all MAP_for_ICMP
