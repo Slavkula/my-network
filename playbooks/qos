@@ -48,3 +48,34 @@
           - class-map match-all MAP_for_ICMP
           - match access-group name ICMP
         parents: class-map match-all MAP_for_ICMP
+
+    - name: policy-map ssh
+      ios_config:
+        lines:
+          - policy-map QoS_all
+          - class MAP_for_SSH
+          - set ip dscp af11
+        parents: policy-map QoS_all
+        
+    - name: policy-map telnet
+      ios_config:
+        lines:
+          - policy-map QoS_all
+          - class MAP_for_TELNET
+          - set ip dscp af33
+        parents: policy-map QoS_all
+        
+    - name: policy-map icmp
+      ios_config:
+        lines:
+          - policy-map QoS_all
+          - class MAP_for_ICMP
+          - set ip dscp af43
+        parents: policy-map QoS_all
+
+    - name: adding service-policy
+      ios_config:
+        lines:
+          - interface ethernet0/3
+          - service-policy input QoS_all
+        parents: interface ethernet0/3
