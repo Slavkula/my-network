@@ -1,0 +1,9 @@
+QoS для роутера R4.
+1. https://github.com/Slavkula/my-network/blob/main/playbooks/qos - плейбук как в прошлой версии, с теми же политиками и метками.
+2. Применю подход Two-rate, three-color policing. Для этого задаю команду: 
+  police cir 10000000 bc 125000 pir 15000000 be 375000
+   conform-action transmit
+   exceed-action set-dscp-transmit af44
+   violate-action drop
+И так у меня появляются цвета:
+Зелёный, который передаёт трафик. Жёлтый, который перемаркировывает трафик в af44 из af43. И красный, который будет отброшен.
