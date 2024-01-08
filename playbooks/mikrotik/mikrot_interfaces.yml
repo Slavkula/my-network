@@ -1,0 +1,30 @@
+---
+- name: Определение переменных  
+  set_fact:  
+    addr_eth2: "{{ eth2 | default(omit) }}/30"  
+
+- name: Адресация на ether2  
+  routeros_command:  
+    commands:  
+      - "/ip address add interface=ether2 address={{ addr_eth2 }}"  
+  when: addr_eth2 != omit  
+  
+- name: Определение переменных  
+  set_fact:  
+    addr_eth3: "{{ eth3 | default(omit) }}/30"  
+
+- name: Адресация на ether3  
+  routeros_command:  
+    commands:  
+      - "/ip address add interface=ether3 address={{ addr_eth3 }}"  
+  when: addr_eth3 != omit  
+      
+- name: Определение переменных  
+  set_fact:  
+    addr_eth4: "{{ eth4 | default(omit) }}/30"  
+  
+- name: Адресация на ether4  
+  routeros_command:  
+    commands:  
+      - "/ip address add interface=ether4 address={{ addr_eth4 }}"  
+  when: addr_eth4 != omit  
