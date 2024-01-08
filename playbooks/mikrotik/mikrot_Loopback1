@@ -1,0 +1,10 @@
+---
+- name: create interface bridge (loopback)
+  routeros_command:
+    commands:
+      - /interface bridge add name Loopback1
+
+- name: Bridge address
+  routeros_command:
+    commands:
+      - "/ip address add interface=Loopback1 address={{ Lo1 }}/32"
