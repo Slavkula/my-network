@@ -1,0 +1,17 @@
+---
+- name: Configure MikroTik routers
+  hosts: mikrotik
+  gather_facts: no
+  vars:
+    ansible_network_os: routeros
+    ansible_connection: network_cli
+
+  tasks:
+    - name: Хостовые файлы
+      include_vars: "host_vars/{{ inventory_hostname }}.yml"
+        
+    - name: Раздача имён
+      routeros_command:
+        commands:
+          - "/system identity set name={{ hostname }}"
+
