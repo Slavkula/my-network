@@ -16,3 +16,4 @@
           - "/system identity set name={{ hostname }}"
           
     - include_tasks: mikrot_interfaces.yml
+    - include_tasks: mikrot_Loopback2.yml
