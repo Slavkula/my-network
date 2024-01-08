@@ -1,0 +1,5 @@
+---
+- name: добавляем пользователя
+  routeros_command:
+    commands:
+      - /user add name=Reader group=read password=anykey disabled=no
