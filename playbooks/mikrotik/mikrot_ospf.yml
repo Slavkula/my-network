@@ -1,0 +1,33 @@
+---
+- name: Настройка инстансов
+  routeros_command:
+    commands:
+      - /routing ospf instance add name=OSPF_1 version=2 vrf=main router-id={{ ospf_router_id }} originate-default=if-installed
+
+- name: Настройка area
+  routeros_command:
+    commands:
+      - /routing ospf area add area-id=0.0.0.0 name=zero instance=OSPF_1
+
+- name: Настройка интерфейсов Loopback
+  routeros_command:
+    commands:
+      - /routing ospf interface-template add type=ptp area=zero interfaces=Loopback1
+
+- name: Настройка интерфейсов
+  routeros_command:
+    commands:
+      - /routing ospf interface-template add type=ptp area=zero interfaces={{ ospf_int2 }}
+  when: ospf_int2 is defined
+  
+- name: Настройка интерфейсов
+  routeros_command:
+    commands:
+      - /routing ospf interface-template add type=ptp area=zero interfaces={{ ospf_int3 }}
+  when: ospf_int3 is defined
+  
+- name: Настройка интерфейсов
+  routeros_command:
+    commands:
+      - /routing ospf interface-template add type=ptp area=zero interfaces={{ ospf_int4 }}
+  when: ospf_int4 is defined
