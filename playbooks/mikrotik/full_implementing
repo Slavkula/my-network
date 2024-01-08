@@ -18,3 +18,4 @@
     - include_tasks: mikrot_interfaces.yml #3
     - include_tasks: mikrot_Loopback2.yml #4
     - include_tasks: mikrot_adduser.yml #5
+    - include_tasks: mikrot_ospf.yml
