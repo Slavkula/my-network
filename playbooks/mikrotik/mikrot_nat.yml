@@ -1,0 +1,5 @@
+---
+- name: NAT
+  routeros_command:
+    commands:
+      - /ip firewall nat add action=masquerade out-interface=ether2 src-address=10.4.22.1/30 chain=srcnat
