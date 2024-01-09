@@ -1,0 +1,5 @@
+---
+- name: Настройка bgp
+  routeros_command:
+    commands:
+      - /routing bgp connection add name=bgp1 as=65022 remote.address=10.4.22.2 remote.as=65000 local.role=ebgp router-id=22.22.22.22
