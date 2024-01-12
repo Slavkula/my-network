@@ -1,15 +1,15 @@
 1. В этой версии установлен ACL на edge роутерах, ограничивающий доступ во внутреннюю сеть: 
-https://github.com/Slavkula/my-network/blob/main/playbooks/ACL
+https://github.com/Slavkula/my-network/blob/main/playbooks/ACL.yml
 После исполнения получаем unreachable от пингов указанных сетей, а все остальные разрешённые успешно пингуются.
 
 2. NTP & Syslog.
-https://github.com/Slavkula/my-network/blob/main/playbooks/ntp_syslog
+https://github.com/Slavkula/my-network/blob/main/playbooks/ntp_syslog.yml
 
 3. Не знаю как реализуется бэкап в сетях с большим количеством роутеров, нашёл и линукс скрипты, и ансибл плейбуки, было упоминание, что даже вручную (надеюсь шутка). В моей я использую Cisco EEM. 
 Давно хотел найти ему какое-нибудь применение, вот и подвернулся случай. Не претендую на то, что выдумал лучший вариант.
-https://github.com/Slavkula/my-network/blob/main/playbooks/EEM_backup
+https://github.com/Slavkula/my-network/blob/main/playbooks/EEM_backup.yml
 
 4. Не подумал сразу, что нужно больше "клиентских" роутеров добавить для теста разных функций, поэтому добавляю сейчас. Итоговый вид и настройки тут:
 https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.26112023.png
 И поднимаю с ними же связность по BGP с помощью плейбуков похожих на эти:
-https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer
+https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer.yml
