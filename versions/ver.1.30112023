@@ -1,7 +1,7 @@
 Эта версия продолжает работу с туннелями у клиентов. 
 
 1. Шифрую трафик туннелей. Хотелось бы использовать сертификаты, но на роутерах поднять не могу (нет в прошивке), а добавить УЦ отдельно не позволяют ресурсы машины. Использую IPsec over GRE profile:
-https://github.com/Slavkula/my-network/blob/main/playbooks/Securing_DMVPN_tunnels
+https://github.com/Slavkula/my-network/blob/main/playbooks/Securing_DMVPN_tunnels.yml
 
 2. Сокращаю таблицу маршрутизации (убираю full view и отправляю внешним роутерам только маршруты по умолчанию (настройки менял так, чтобы подходили другим, но общий вид в плейбуке):
-https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_default_route
+https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_default_route.yml
