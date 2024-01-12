@@ -8,7 +8,7 @@
 Дописывая по ходу освоения, все плейбуки будут добавляться в соответствующую директорию. Синтаксис для вложенных несколько отличается от самостоятельных, добавлять их буду с 
 учётом этого фактора.
 
-Основной плейбук находится здесь: https://github.com/Slavkula/my-network/blob/main/playbooks/mikrotik/full_implementing
+Основной плейбук находится здесь: https://github.com/Slavkula/my-network/blob/main/playbooks/mikrotik/full_implementing.yml
 1. Файл переменных
 2. Настройка hostname
 3. Настройка адресов интерфейсов
