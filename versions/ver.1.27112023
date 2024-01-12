@@ -3,12 +3,12 @@
 
 1. Раздаём дополнительные loopack2,3,4 адреса. Плейбуки не буду множить, в одном из прошлых интерфейсы уже настраивал.
 
-2. Создаю DMVPN hub, им будет роутер R13: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_hub
+2. Создаю DMVPN hub, им будет роутер R13: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_hub.yml
 
-3. DMVPN spoke: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_spoke
+3. DMVPN spoke: https://github.com/Slavkula/my-network/blob/main/playbooks/DMVPN_spoke.yml
 
 4. Для проверки работоспособности поставил ospf и раздам все маршруты, туннели в нулевой зоне, лупбэки в своих.
-https://github.com/Slavkula/my-network/blob/main/playbooks/ospf_for_tunnels
+https://github.com/Slavkula/my-network/blob/main/playbooks/ospf_for_tunnels.yml
 В плейбуке добавлены настройки для туннельных интерфейсов: изменение типа сети, ospf приоритет (один задуман как DR на нём будет отличаться).
 
 Тесты:
