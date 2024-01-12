@@ -15,11 +15,11 @@ line vty 0 4
 login local
 
 2.Далее ансибл. Сначала раздам hostname. Использованный плейбук по ссылке:
-https://github.com/Slavkula/my-network/blob/main/playbooks/hostname
+https://github.com/Slavkula/my-network/blob/main/playbooks/hostname.yml
 К чему лишние шаги в плейбуке: в нём я просто решил попробовать что-то более сложное, чем подстановка переменных из host_vars.
 
 3.Раздаю адреса на интерфейсы.
-https://github.com/Slavkula/my-network/blob/main/playbooks/interface_address
+https://github.com/Slavkula/my-network/blob/main/playbooks/interface_address.yml
 На некоторых роутерах не используется интерфейс ethernet0/3 (на шаге настройки внутренней сети), поэтому в плейбуке на нём примечание "when", которое пропускает настройку,
 если переменная не определена.
 
@@ -27,6 +27,6 @@ https://github.com/Slavkula/my-network/blob/main/playbooks/interface_address
 Внутреннюю маршрутизацию построю на ISIS, потому что в основном всегда использовал OSPF. На этом этапе не будет ничего очень сложного. Все будут в одной зоне и одного уровня.
 В плейбуке настройка для интерфейсов 1 и 2, для некоторых роутеров (1 и 3), которые используют внутри своей сети интерфейсы ethenet0/3 таск надо будет выполнить отдельно. 
 В моём плейбуке это не будет отображено.
-https://github.com/Slavkula/my-network/blob/main/playbooks/isis_implementing
+https://github.com/Slavkula/my-network/blob/main/playbooks/isis_implementing.yml
 
 Во время выполнения возникла проблема: net идентификатор не хотел раздаваться, пришлось использовать конструкцию как в hostname, благо эта часть одинаковая в обоих случаях.
