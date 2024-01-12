@@ -1,9 +1,9 @@
 Добавляю MPLS L3VPN  для клиентов R16 - R25. Топология: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.31112023.PNG
 
-1. Включаю MPLS и LDP на всей внутренней сети: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls
+1. Включаю MPLS и LDP на всей внутренней сети: https://github.com/Slavkula/my-network/blob/main/playbooks/mpls.yml
 
 2. Настраиваю vrf, назначаю на интерфейсы, в них же поднимаю BGP процесс:
-https://github.com/Slavkula/my-network/blob/main/playbooks/MPLS_L3VPN
+https://github.com/Slavkula/my-network/blob/main/playbooks/MPLS_L3VPN.yml
 
 3. Не нашёл модуль настройки в address-family vpnv4, пришлось настраивать руками. В конфиг добавил:
 а) iBGP соседство между своими PE-роутерами:
