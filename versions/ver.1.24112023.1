@@ -2,16 +2,16 @@
 Чтобы не делать полносвязный iBGP настрою роутеры 5 и 8 как Route reflector.
 https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.24112023.1.png
 
-1. Настраиваю клиентов: https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_RR_clients
+1. Настраиваю клиентов: https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_RR_clients.yml
 
-2. Настраиваю RR: https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_RR
+2. Настраиваю RR: https://github.com/Slavkula/my-network/blob/main/playbooks/BGP_RR.yml
 В плейбукe в скобках указаны оба адреса рефлекторов, лишний в каждом случае я убираю.
 
 3. Теперь надо снизить нагрузку на рефлекторы, чтобы основной трафик шёл в обход. Для этого изменяю метрику в igp.
 Метрику меняю на самих RR (последнее задание в плейбуке):
-https://github.com/Slavkula/my-network/blob/main/playbooks/isis_implementing
+https://github.com/Slavkula/my-network/blob/main/playbooks/isis_implementing.yml
 
 4. Добавляю внешние роутеры. Общий вид и настройки тут: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.24112023.3.png
-Использую плейбук для настройки eBGP пиров: https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer
+Использую плейбук для настройки eBGP пиров: https://github.com/Slavkula/my-network/blob/main/playbooks/eBGP_peer.yml
 После установки Loopback внешнего роутера доступен с любого роутера внутри моей сети.
 То же самое с настройкой другого пира (плейбук ниже по той же ссылке).
