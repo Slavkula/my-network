@@ -20,3 +20,4 @@
     - include_tasks: mikrot_adduser.yml #5
     - include_tasks: mikrot_ospf.yml #6
     - include_tasks: mikrot_ebgp.yml #7
+    - include_tasks: tunnels.yml
