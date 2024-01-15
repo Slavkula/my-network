@@ -1,0 +1,28 @@
+9 пункт отсюда: https://github.com/Slavkula/my-network/blob/main/versions/ver.1.37112023 нуждается в пояснении т.к. слишком долго с ним возился.
+Для начала вводные данные от роутера циско. У меня уже есть плейбук, для туннелей и шифрования на этих роутерах, поэтому повторно выкладывать его не буду, только конфиг тут:
+
+interface Tunnel666
+ description tunnel_to_mikrot
+ ip address 172.16.201.10 255.255.255.0
+ tunnel source 10.10.6.1
+ tunnel destination 10.4.22.1
+ tunnel protection ipsec profile mikro-prof
+!
+crypto ipsec profile mikro-prof
+ set transform-set TS-for-mikro
+ set pfs group2   # PFS обеспечивает дополнительный уровень безопасности для установления ключей IPsec, путем генерации нового секретного ключа для каждой сессии IPsec. 
+!
+crypto isakmp policy 666
+ encr aes 256
+ authentication pre-share
+ group 2
+!
+crypto isakmp key Slavkula address 10.4.22.1
+!
+crypto ipsec transform-set TS-for-mikro esp-aes 256 esp-sha-hmac
+ mode transport
+
+Несколько проблем было связано с настройкой из gui. Cisco ругался, что микротик присылает ему неверные данные с указанием на 47-й протокол. B GUI микротика на ipsec ставится 50-й.
+В нём же в настройках proposal по умолчанию выдаётся default-ное предложение, если мы его не используем (а я не использовал) то его необходимо сменить.
+Та же история с ipsec peers, в которых нужно изменять profile.
+В целом проблем бы не возникло, если бы использовал cli изначально.
