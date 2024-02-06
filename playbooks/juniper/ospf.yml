@@ -1,0 +1,11 @@
+---
+- name: Merge provided OSPFv2 configuration into running config.
+  junipernetworks.junos.junos_ospfv2:
+    config:
+      - reference_bandwidth: 10g
+        areas:
+          - area_id: 0.0.0.100
+            interfaces:
+              - name: lo0
+              - name: ge-0/0/7
+    state: merged
