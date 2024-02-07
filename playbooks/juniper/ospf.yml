@@ -1,0 +1,21 @@
+---
+- name: Настройка ospf на роутере Juniper
+  hosts: juniper
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Получение текущей конфигурации OSPF
+      ansible.netcommon.cli_command:
+        command: "show configuration protocols ospf"
+      register: ospf_config
+
+    - name: Отправка команды настройки OSPF для lo0
+      ansible.netcommon.cli_config:
+        config: "set protocols ospf area 0.0.0.100 interface lo0"
+      when: "'set protocols ospf area 0.0.0.100 interface lo0' not in ospf_config.stdout"
+
+    - name: Отправка команды настройки OSPF для ge-0/0/7
+      ansible.netcommon.cli_config:
+        config: "set protocols ospf area 0.0.0.100 interface ge-0/0/7"
+      when: "'set protocols ospf area 0.0.0.100 interface ge-0/0/7' not in ospf_config.stdout"
