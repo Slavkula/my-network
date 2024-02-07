@@ -1,9 +1,0 @@
----
-- name: Настройка ip на роутере Juniper
-  hosts: juniper
-  connection: local
-  gather_facts: no
-
-  tasks:
-  - include_tasks: jun_ospf.yml
-  - include_tasks: jun_interfaces.yml
