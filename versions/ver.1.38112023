@@ -1,8 +1,7 @@
 Заметка: https://github.com/Slavkula/my-network/blob/main/playbooks/juniper/1%20readme.txt
 Начальную настройку сделал вручную - учётка, ssh, адрес для интерфейса управления.
 
-В топологии будет выглядеть так: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.38112023.1.png
-1. Добавлю лупбэк-интерфейс и дам адрес на тот, который смотрит во сторону циски.
+1. Добавляю лупбэк и раздаю адреса интерфейсов.
 
 2-1. Объединяю через осфп. Никаких тупиковых зон, разных метрик на разные интерфейсы и прочего изменять не буду, хотя это не проблема.
 https://github.com/Slavkula/my-network/blob/main/playbooks/juniper/ospf.yml
