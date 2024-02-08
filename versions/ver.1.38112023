@@ -1,3 +1,4 @@
+Заметка: https://github.com/Slavkula/my-network/blob/main/playbooks/juniper/1%20readme.txt
 Начальную настройку сделал вручную - учётка, ssh, адрес для интерфейса управления.
 
 В топологии будет выглядеть так: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.38112023.1.png
