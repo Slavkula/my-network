@@ -13,10 +13,10 @@
       ansible.netcommon.cli_config:
         config:  "set protocols bgp group eBGP type external"
 
+    - name: Здесь задаётся аs для пира
+      ansible.netcommon.cli_config:
+        config:  "set protocols bgp group eBGP neighbor 10.10.0.2 peer-as 65010"
+        
     - name: Тут задаю адрес пира и свой
       ansible.netcommon.cli_config:
         config:  "set protocols bgp group eBGP neighbor 10.10.0.2 local-address 10.10.0.1"
-
-    - name: Здесь задаётся ас для пира
-      ansible.netcommon.cli_config:
-        config:  "set protocols bgp group eBGP neighbor 10.10.0.2 peer-as 65010"
