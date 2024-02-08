@@ -9,6 +9,14 @@
       ansible.netcommon.cli_config:
         config: "set protocols bgp local-as 65333"
 
-    - name: Отправка команды настройки OSPF для ge-0/0/7
+    - name: Тут определяю тип группы bgp
       ansible.netcommon.cli_config:
-        config: "set protocols ospf area 0.0.0.100 interface ge-0/0/7"
+        config:  "set protocols bgp group eBGP type external"
+
+    - name: Тут задаю адрес пира и свой
+      ansible.netcommon.cli_config:
+        config:  "set protocols bgp group eBGP neighbor 10.10.0.2 local-address 10.10.0.1"
+
+    - name: Здесь задаётся ас для пира
+      ansible.netcommon.cli_config:
+        config:  "set protocols bgp group eBGP neighbor 10.10.0.2 peer-as 65010"
