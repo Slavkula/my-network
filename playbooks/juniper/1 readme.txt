@@ -3,4 +3,3 @@
 Новый вид всей сети: https://github.com/Slavkula/my-network/blob/main/PNG/ver.1.38112023.1.png
 2. Не буду использовать комьюнити модули.
 3. Не самое важное, но постараюсь попробовать по максимуму из учебника JNCIP http://www.surfer.mauigateway.com/library/JNCIP_studyguide.pdf
-4. 
