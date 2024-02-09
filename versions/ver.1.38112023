@@ -1,7 +1,0 @@
-Заметка: https://github.com/Slavkula/my-network/blob/main/playbooks/juniper/1%20readme.txt
-Начальную настройку сделал вручную - учётка, ssh, адрес для интерфейса управления.
-
-1. Добавляю лупбэк и раздаю адреса интерфейсов.
-
-2-1. 
-2-2. eBGP:
