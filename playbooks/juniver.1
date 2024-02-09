@@ -1,0 +1,10 @@
+Начальная настройка в комментариях не нуждается:
+1. set system host-name Toster
+2. set interfaces fxp0 unit 0 family inet address 192.168.1.105/24
+3. set system services ssh 
+4. set system login user ansible authentication plain-text-password
+
+Интерфейсы. Чтобы не перенастраивать всё, хотя с ансиблом это и не сложно, окружение своей сети, я выдам те же адреса, которые были на старой циске:
+1. set interfaces lo0 unit 0 family inet address 172.16.255.105/32
+2. set interfaces ge-0/0/1 unit 0 family inet address 172.16.1.6/30
+3. set interfaces ge-0/0/0 unit 0 family inet address 172.16.1.9/30
