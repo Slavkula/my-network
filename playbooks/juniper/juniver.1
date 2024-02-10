@@ -15,3 +15,9 @@
 3. set interface ge-0/0/1 level 1 disable                    #повторяю для lo0 и ge-0/0/0
 4. set protocols isis interface ge-0/0/1 level 2 metric 63   #так же для всех интерфейсов
 
+iBGP.
+1. set autonomous-system 65000
+2. edit protocols bgp group iBGP
+3. set type internal
+4. set local-address 172.16.255.105
+5. set neighbor 172.16.255.104        #повторяю для всех соседей
