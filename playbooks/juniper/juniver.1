@@ -15,9 +15,26 @@
 3. set interface ge-0/0/1 level 1 disable                    #повторяю для lo0 и ge-0/0/0
 4. set protocols isis interface ge-0/0/1 level 2 metric 63   #так же для всех интерфейсов
 
-iBGP.
-1. set autonomous-system 65000
-2. edit protocols bgp group iBGP
-3. set type internal
-4. set local-address 172.16.255.105
-5. set neighbor 172.16.255.104        #повторяю для всех соседей
+iBGP. RR. На этом моменте пришла замечательная идея - писать не команды, а конфиг того, что настроено.
+1. Создана группа для клиентов "cluster-8888"
+2. Создана группа для рефлекторов "RR"
+    bgp {
+        group cluster-8888 {
+            type internal;
+            local-address 172.16.255.105;
+            log-updown;
+            cluster 8.8.8.8;
+            neighbor 172.16.255.104;
+            neighbor 172.16.255.106;
+            neighbor 172.16.255.201;
+            neighbor 172.16.255.202;
+            neighbor 172.16.255.203;
+            neighbor 172.16.255.207;
+            neighbor 172.16.255.209;
+        }
+        group RR {
+            type internal;
+            local-address 172.16.255.105;
+            neighbor 172.16.255.208;
+        }
+
