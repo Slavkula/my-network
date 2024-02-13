@@ -1,0 +1,4 @@
+1. Configuring interface addresses:
+https://github.com/Slavkula/my-network/blob/main/juniper/playbooks/interfaces.yml
+In this playbook I'll use "when: N is defined" for implementing interfaces which defined in my inventory file.
+I'm not used to check if interface already has address or not.
