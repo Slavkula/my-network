@@ -1,4 +1,2 @@
-1. Configuring interface addresses:
+1. Configuring interface addresses if it's defined in inventory.ini:
 https://github.com/Slavkula/my-network/blob/main/juniper/playbooks/interfaces.yml
-In this playbook I'll use "when: N is defined" for configuring interfaces which defined in my inventory file.
-I don't use checking whether the interface already has an address or not.
