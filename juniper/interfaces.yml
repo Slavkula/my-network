@@ -1,0 +1,39 @@
+---
+- name: Настройка hostname на роутере Juniper
+  hosts: juniper
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Файлы переменных
+      include_vars: "host_vars/jun_vars/{{ inventory_hostname }}.yml"  
+
+    - name: interface lo0
+      ansible.netcommon.cli_config:
+        config: "set interfaces lo0 unit 0 family inet address {{ lo0 }}"
+      when: lo0 is defined
+      
+    - name: interface ge-0/0/0
+      ansible.netcommon.cli_config:
+        config: "set interfaces ge-0/0/0 unit 0 family inet address {{ ge_0_0_0 }}"
+      when: "ge_0_0_0 is defined"
+      
+    - name: interface ge-0/0/1
+      ansible.netcommon.cli_config:
+        config: "set interfaces ge-0/0/1 unit 0 family inet address {{ ge_0_0_1 }}"
+      when: "ge_0_0_1 is defined"
+      
+    - name: interface ge-0/0/2
+      ansible.netcommon.cli_config:
+        config: "set interfaces ge-0/0/2 unit 0 family inet address {{ ge_0_0_2 }}"
+      when: "ge_0_0_2 is defined"
+      
+    - name: interface ge-0/0/3
+      ansible.netcommon.cli_config:
+        config: "set interfaces ge-0/0/3 unit 0 family inet address {{ ge_0_0_3 }}"
+      when: "ge_0_0_3 is defined"
+      
+    - name: interface ge-0/0/4
+      ansible.netcommon.cli_config:
+        config: "set interfaces ge-0/0/4 unit 0 family inet address {{ ge_0_0_4 }}"
+      when: "ge_0_0_4 is defined"
