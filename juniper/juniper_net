@@ -1,7 +1,0 @@
-    - name: interface ge-0/0/0
-      ansible.netcommon.cli_config:
-        config: "set interfaces ge-0/0/0 unit 0 family inet address {{ ge-0/0/0 }}"
-      when: "ge-0/0/0 is defined"
-
-fatal: [192.168.1.107]: FAILED! => {"msg": "The conditional check 'ge-0/0/0 is defined' failed. The error was: division by zero\n\nThe error appears to be in '/home/slavik/Desktop/playbook/junos.yml': line 16, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: interface ge-0/0/0\n      ^ here\n"}
-
