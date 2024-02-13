@@ -1,11 +1,11 @@
 ---
-- name: Настройка hostname на роутере Juniper
+- name: Configuring interface addresses
   hosts: juniper
   connection: local
   gather_facts: no
 
   tasks:
-    - name: Файлы переменных
+    - name: vars
       include_vars: "host_vars/jun_vars/{{ inventory_hostname }}.yml"  
 
     - name: interface lo0
