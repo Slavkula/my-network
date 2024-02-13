@@ -1,4 +1,4 @@
-This is my project of network using Juniper routers and Ansible.
-All playbooks for this project and screenshots of topology you can find in "juniper" folder.
+This is my network project, which utilizes Juniper routers and Ansible.
+You can find all the playbooks for this project, along with screenshots of the topology, in the ‘juniper’ folder.
 
 https://github.com/Slavkula/my-network/blob/main/juniper/interfaces.yml
