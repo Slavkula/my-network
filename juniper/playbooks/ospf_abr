@@ -1,0 +1,27 @@
+---
+- name: Настройка ospf на роутере Juniper
+  hosts: 192.168.1.105
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: Gathering interfaces
+      ansible.netcommon.cli_config:
+        config: "set interfaces interface-range RoIntAre0 member-range ge-0/0/2 to ge-0/0/3"
+
+    - name: Setting up ospf to phys area 0
+      ansible.netcommon.cli_config:
+        config: "set protocols ospf area 0.0.0.0 interface RoIntAre0"
+        
+    - name: Setting up ospf to lo0
+      ansible.netcommon.cli_config:
+        config: "set protocols ospf area 0.0.0.0 interface lo0"
+        
+    - name: Gathering interfaces
+      ansible.netcommon.cli_config:
+        config: "set interfaces interface-range RoIntAre1 member-range ge-0/0/0 to ge-0/0/1"
+
+    - name: Setting up ospf to phys area 1
+      ansible.netcommon.cli_config:
+        config: "set protocols ospf area 0.0.0.1 interface RoIntAre1"
